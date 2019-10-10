@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
 
 @Mapper
@@ -98,4 +99,13 @@ public interface UserMapper {
      * @mbg.generated
      */
     int updateByPrimaryKey(User record);
+
+    /**
+     * 多表查询也是可以在这写sql，反正mybatis是转换 或者自己另外起一个mapper 返回结构也可以自定义
+     * @param name
+     * @return
+     */
+    @Select("SELECT user_id AS userId, is_deleted AS isDeleted FROM user " +
+            "WHERE name = #{name} AND is_deleted = 0 LIMIT 200")
+    List<User> selectByName(@Param("name") String name);
 }

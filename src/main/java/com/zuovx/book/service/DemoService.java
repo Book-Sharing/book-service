@@ -20,4 +20,8 @@ public class DemoService {
 	public List<User> getAllUser(){
 		return userMapper.selectByExample(null);
 	}
+
+	public List<User> getUserByName(String name){
+		return userMapper.selectByName(name);
+	}
 }

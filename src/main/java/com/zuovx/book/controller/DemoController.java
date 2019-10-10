@@ -4,6 +4,8 @@ import com.zuovx.book.model.User;
 import com.zuovx.book.service.DemoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -22,5 +24,10 @@ public class DemoController {
 	@RequestMapping("/getAllUser")
 	public List<User> getAllUser(){
 		return demoService.getAllUser();
+	}
+
+	@RequestMapping(value = "/getUserByName",method = RequestMethod.GET)
+	public List<User> getUserByName(@RequestParam(value = "name") String name){
+		return demoService.getUserByName(name);
 	}
 }
