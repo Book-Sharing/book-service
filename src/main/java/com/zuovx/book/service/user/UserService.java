@@ -76,6 +76,7 @@ public class UserService {
 	public DealResult login(User user){
 		DealResult dealResult = new DealResult();
 		dealResult.setSucceed(false);
+		dealResult.setMsg("用户不合法！");
 		if (user == null){
 			dealResult.setMsg("用户信息为空！");
 			dealResult.setSucceed(false);
@@ -89,7 +90,6 @@ public class UserService {
 			dealResult.setSucceed(true);
 			dealResult.setMsg(sign(userList.get(0).getAccount(),userList.get(0).getUserId()));
 		}
-		dealResult.setMsg("用户不合法！");
 		return dealResult;
 	}
 
