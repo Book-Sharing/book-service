@@ -76,8 +76,6 @@ public class UserController {
 			DealResult dealResult = userService.login(user);
 			if (dealResult.isSucceed()){
 				jsonResult.setStatus(200);
-				log.info(dealResult.getMsg());
-				log.info(URLEncoder.encode(dealResult.getMsg(),"utf-8")+"======");
 				Cookie cookie = new Cookie(Constants.TOKEN, URLEncoder.encode(dealResult.getMsg(),"utf-8"));
 				cookie.setPath("/");
 				response.addCookie(cookie);
