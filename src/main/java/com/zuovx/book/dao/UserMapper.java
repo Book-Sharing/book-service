@@ -105,7 +105,16 @@ public interface UserMapper {
      * @param name
      * @return
      */
-    @Select("SELECT user_id AS userId, is_deleted AS isDeleted FROM user " +
+    @Select("SELECT * FROM user " +
             "WHERE name = #{name} AND is_deleted = 0 LIMIT 200")
     List<User> selectByName(@Param("name") String name);
+
+    /**
+     * 检查用户是否存在
+     * @param account 账号
+     * @param userId 用户id
+     * @return
+     */
+    @Select("SELECT EXISTS(SELECT 1 FROM user WHERE account = #{account} and user_id = #{userId} and is_deleted = 0) ")
+    boolean checkUserExists(@Param("account") String account,@Param("userId") String userId);
 }
