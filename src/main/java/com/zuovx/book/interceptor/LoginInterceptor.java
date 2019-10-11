@@ -14,6 +14,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
+import java.net.URLDecoder;
 
 import static com.zuovx.book.utils.Constants.TOKEN;
 
@@ -50,7 +51,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			if (token == null || token.isEmpty()){
 				for (Cookie cookie : request.getCookies()){
 					if (TOKEN.equals(cookie.getName())){
-						token = cookie.getValue();
+						token = URLDecoder.decode(cookie.getValue(), "UTF-8");
 					}
 				}
 			}

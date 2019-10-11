@@ -2,6 +2,7 @@ package com.zuovx.book.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.zuovx.book.annotation.LoginRequired;
+import com.zuovx.book.config.AuthJwt;
 import com.zuovx.book.model.User;
 import com.zuovx.book.service.bus.DealResult;
 import com.zuovx.book.service.bus.JsonResult;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.net.URLEncoder;
 
 /**
  * @author zuoweixing@guazi.com
@@ -31,6 +33,9 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private AuthJwt authJwt;
+
 	/**
 	 * 注册，成功后生成token返回到cookie中
 	 * @return
@@ -43,7 +48,7 @@ public class UserController {
 			DealResult dealResult = userService.register(user);
 			if (dealResult.isSucceed()){
 				jsonResult.setStatus(200);
-				Cookie cookie = new Cookie(Constants.TOKEN,dealResult.getMsg());
+				Cookie cookie = new Cookie(Constants.TOKEN,URLEncoder.encode(dealResult.getMsg(),"utf-8"));
 				cookie.setPath("/");
 				response.addCookie(cookie);
 				jsonResult.setMsg("注册成功");
@@ -71,7 +76,7 @@ public class UserController {
 			DealResult dealResult = userService.login(user);
 			if (dealResult.isSucceed()){
 				jsonResult.setStatus(200);
-				Cookie cookie = new Cookie(Constants.TOKEN,dealResult.getMsg());
+				Cookie cookie = new Cookie(Constants.TOKEN, URLEncoder.encode(dealResult.getMsg(),"utf-8"));
 				cookie.setPath("/");
 				response.addCookie(cookie);
 				jsonResult.setMsg("登陆成功");
