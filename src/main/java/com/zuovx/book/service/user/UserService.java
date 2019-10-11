@@ -90,7 +90,6 @@ public class UserService {
 			dealResult.setMsg(sign(userList.get(0).getAccount(),userList.get(0).getUserId()));
 		}
 		dealResult.setMsg("用户不合法！");
-		//todo 验证一系列算法生成token接着返回给前端每次访问都带过来，设置过期时间
 		return dealResult;
 	}
 
