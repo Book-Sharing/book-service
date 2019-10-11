@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.net.URLEncoder;
 
 /**
- * @author zuoweixing@guazi.com
+ * @author zuoweixing
  * @date 2019-10-11 14:27
  */
 @Slf4j
