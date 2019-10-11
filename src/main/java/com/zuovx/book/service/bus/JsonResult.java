@@ -3,7 +3,7 @@ package com.zuovx.book.service.bus;
 import lombok.Data;
 
 /**
- * @author zuoweixing@guazi.com
+ * @author zuoweixing
  * @date 2019-10-10 17:45
  */
 @Data
