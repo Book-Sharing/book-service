@@ -1,5 +1,6 @@
 package com.zuovx.book.controller;
 
+import com.zuovx.book.annotation.LoginRequired;
 import com.zuovx.book.model.User;
 import com.zuovx.book.service.DemoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ public class DemoController {
 	private DemoService demoService;
 
 	@RequestMapping("/getAllUser")
+	@LoginRequired
 	public List<User> getAllUser(){
 		return demoService.getAllUser();
 	}
