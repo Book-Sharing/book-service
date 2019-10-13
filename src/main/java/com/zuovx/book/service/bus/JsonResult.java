@@ -9,6 +9,6 @@ import lombok.Data;
 @Data
 public class JsonResult {
 	private String msg;
-	private int status;
+	private int status = 200;
 	private Object data;
 }

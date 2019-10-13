@@ -1,5 +1,6 @@
 package com.zuovx.book.model;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -28,6 +29,7 @@ public class Desire {
      *
      * @mbg.generated
      */
+    @NotNull
     private Date createdAt;
 
     /**
@@ -39,6 +41,7 @@ public class Desire {
      *
      * @mbg.generated
      */
+    @NotNull
     private Date updateAt;
 
     /**
@@ -50,6 +53,7 @@ public class Desire {
      *
      * @mbg.generated
      */
+    @NotNull
     private String desireTitle;
 
     /**
@@ -61,6 +65,7 @@ public class Desire {
      *
      * @mbg.generated
      */
+    @NotNull
     private String content;
 
     /**
