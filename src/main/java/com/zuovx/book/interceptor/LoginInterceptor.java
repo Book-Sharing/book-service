@@ -44,6 +44,9 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 		// 判断接口是否需要登录
 		LoginRequired methodAnnotation = method.getAnnotation(LoginRequired.class);
 		// 有 @LoginRequired 注解，需要认证
+
+		// 防止乱码
+		response.setContentType("text/html;charset=UTF-8");
 		if (methodAnnotation != null) {
 			// 这写你拦截需要干的事儿，比如取缓存，SESSION，权限判断等
 
