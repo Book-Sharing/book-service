@@ -26,7 +26,7 @@ public class Swagger2Config {
 				.apiInfo(new ApiInfoBuilder()
 						.title("标题：胡思乱想公司_书籍共享系统_接口文档")
 						.description("描述：用于胡思乱想公司内部接口")
-						.contact(new Contact("北漂小分组", null, null))
+						.contact(new Contact("突发奇想小分组", "https://github.com/Book-Sharing/book", null))
 						.version("版本号:1.0")
 						.build())
 				.select()
