@@ -22,7 +22,7 @@ public class WebConfig implements WebMvcConfigurer {
 	/**
 	 * 前后端分离，统一解决跨域问题
 	 * 前端每次发送请求也都有在ajax里面设置xhrFields:{withCredentials: true}属性。
-	 * @param registry
+	 * @param registry r
 	 */
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {

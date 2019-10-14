@@ -108,9 +108,9 @@ public class UserController {
 
 	/**
 	 * 登出
-	 * @param response
-	 * @param request
-	 * @return
+	 * @param response r
+	 * @param request r
+	 * @return r
 	 */
 	@ApiOperation("登出")
 	@RequestMapping(value = "/logout",method = RequestMethod.GET)
