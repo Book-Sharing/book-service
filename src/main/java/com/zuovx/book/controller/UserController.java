@@ -9,6 +9,7 @@ import com.zuovx.book.service.bus.JsonResult;
 import com.zuovx.book.service.user.UserService;
 import com.zuovx.book.utils.Constants;
 import com.zuovx.book.utils.CookieUtils;
+import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,6 +26,7 @@ import java.net.URLEncoder;
  * @author zuoweixing
  * @date 2019-10-11 14:27
  */
+@Api(value = "UserController",description = "用户相关接口")
 @Slf4j
 @RestController
 @RequestMapping(value = "/user")
@@ -40,6 +42,14 @@ public class UserController {
 	 * 注册，成功后生成token返回到cookie中
 	 * @return
 	 */
+	@ApiOperation(value = "注册",httpMethod = "POST",response = JsonResult.class)
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Successful — 请求已完成"),
+			@ApiResponse(code = 400, message = "请求中有语法问题，或不能满足请求"),
+			@ApiResponse(code = 401, message = "未授权客户机访问数据"),
+			@ApiResponse(code = 404, message = "服务器找不到给定的资源；文档不存在"),
+			@ApiResponse(code = 500, message = "服务器不能完成请求")}
+	)
 	@RequestMapping(value = "/register",method = RequestMethod.POST)
 	public JsonResult register(HttpServletResponse response, @RequestBody String requestBody){
 		JsonResult jsonResult = new JsonResult();
@@ -68,6 +78,10 @@ public class UserController {
 	 * 登陆
 	 * @return
 	 */
+	@ApiOperation("登陆")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "requestBody",value = "{\"account\":\"123456\",\"password\":\"root123456\"}", required = true),
+	})
 	@RequestMapping(value = "/login",method = RequestMethod.POST)
 	public JsonResult login(HttpServletResponse response, @RequestBody String requestBody){
 		JsonResult jsonResult = new JsonResult();
@@ -98,6 +112,7 @@ public class UserController {
 	 * @param request
 	 * @return
 	 */
+	@ApiOperation("登出")
 	@RequestMapping(value = "/logout",method = RequestMethod.GET)
 	@LoginRequired
 	public JsonResult logout(HttpServletResponse response,HttpServletRequest request){
