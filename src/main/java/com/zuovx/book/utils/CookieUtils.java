@@ -14,11 +14,7 @@ public class CookieUtils {
 	public static Cookie get(HttpServletRequest request,
 							 String name) {
 		Map<String, Cookie> cookieMap = readCookieMap(request);
-		if (cookieMap.containsKey(name)) {
-			return cookieMap.get(name);
-		}else {
-			return null;
-		}
+		return cookieMap.getOrDefault(name, null);
 	}
 
 	public static void setRequest(HttpServletRequest request,String name,String value){
@@ -32,8 +28,8 @@ public class CookieUtils {
 
 	/**
 	 * 将cookie封装成Map
-	 * @param request
-	 * @return
+	 * @param request r
+	 * @return r
 	 */
 	private static Map<String, Cookie> readCookieMap(HttpServletRequest request) {
 		Map<String, Cookie> cookieMap = new HashMap<>();
