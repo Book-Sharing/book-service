@@ -195,63 +195,63 @@ public class DesireExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andDesireIdIsNull() {
-            addCriterion("desire_id is null");
+        public Criteria andIdIsNull() {
+            addCriterion("id is null");
             return (Criteria) this;
         }
 
-        public Criteria andDesireIdIsNotNull() {
-            addCriterion("desire_id is not null");
+        public Criteria andIdIsNotNull() {
+            addCriterion("id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDesireIdEqualTo(Integer value) {
-            addCriterion("desire_id =", value, "desireId");
+        public Criteria andIdEqualTo(Integer value) {
+            addCriterion("id =", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andDesireIdNotEqualTo(Integer value) {
-            addCriterion("desire_id <>", value, "desireId");
+        public Criteria andIdNotEqualTo(Integer value) {
+            addCriterion("id <>", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andDesireIdGreaterThan(Integer value) {
-            addCriterion("desire_id >", value, "desireId");
+        public Criteria andIdGreaterThan(Integer value) {
+            addCriterion("id >", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andDesireIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("desire_id >=", value, "desireId");
+        public Criteria andIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("id >=", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andDesireIdLessThan(Integer value) {
-            addCriterion("desire_id <", value, "desireId");
+        public Criteria andIdLessThan(Integer value) {
+            addCriterion("id <", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andDesireIdLessThanOrEqualTo(Integer value) {
-            addCriterion("desire_id <=", value, "desireId");
+        public Criteria andIdLessThanOrEqualTo(Integer value) {
+            addCriterion("id <=", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andDesireIdIn(List<Integer> values) {
-            addCriterion("desire_id in", values, "desireId");
+        public Criteria andIdIn(List<Integer> values) {
+            addCriterion("id in", values, "id");
             return (Criteria) this;
         }
 
-        public Criteria andDesireIdNotIn(List<Integer> values) {
-            addCriterion("desire_id not in", values, "desireId");
+        public Criteria andIdNotIn(List<Integer> values) {
+            addCriterion("id not in", values, "id");
             return (Criteria) this;
         }
 
-        public Criteria andDesireIdBetween(Integer value1, Integer value2) {
-            addCriterion("desire_id between", value1, value2, "desireId");
+        public Criteria andIdBetween(Integer value1, Integer value2) {
+            addCriterion("id between", value1, value2, "id");
             return (Criteria) this;
         }
 
-        public Criteria andDesireIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("desire_id not between", value1, value2, "desireId");
+        public Criteria andIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("id not between", value1, value2, "id");
             return (Criteria) this;
         }
 
