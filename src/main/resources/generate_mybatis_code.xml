@@ -41,9 +41,9 @@
     </javaClientGenerator>
 
 
-   <table tableName="book" > </table>
-    <table tableName="desire" > </table>
-    <table tableName="user" > </table>
+   <table tableName="friend" > </table>
+    <table tableName="friend_group" > </table>
+    <table tableName="message" > </table>
 
 
 

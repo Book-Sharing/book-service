@@ -38,38 +38,5 @@ CREATE TABLE `order_item`  (
   PRIMARY KEY (`id`)
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT '订单详细信息表';
 
-CREATE TABLE `friend`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `created_at` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
-  `update_at` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '更改时间',
-  `user_id` int(11) NOT NULL DEFAULT 0 COMMENT '用户id',
-  `friend_user_id` int(11) NOT NULL DEFAULT 0 COMMENT '用户朋友id',
-  `friend_group_id` int(11) NOT NULL DEFAULT 0 COMMENT '朋友所属分组id',
-  `is_deleted` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0否 1是',
-  PRIMARY KEY (`id`)
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT '好友表';
-
-CREATE TABLE `friend_group`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `created_at` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
-  `update_at` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '更改时间',
-  `user_id` int(11) NOT NULL DEFAULT 0 COMMENT '用户id',
-  `name` varchar (64) NOT NULL DEFAULT '' COMMENT '分组名称',
-  `is_deleted` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0否 1是',
-  PRIMARY KEY (`id`)
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT '好友分组表';
-
-CREATE TABLE `message`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `created_at` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
-  `update_at` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '更改时间',
-  `text` varchar (1024) NOT NULL DEFAULT 0 COMMENT '内容',
-  `from_user_id` int(11) NOT NULL DEFAULT 0 COMMENT '发送者id',
-  `to_user_id` int(11) NOT NULL DEFAULT 0 COMMENT '接收者id',
-  `message_type` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0文本 1 图片',
-  `is_deleted` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0否 1是',
-  PRIMARY KEY (`id`)
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT '消息表';
-
 
 

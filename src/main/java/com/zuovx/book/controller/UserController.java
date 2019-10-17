@@ -35,8 +35,6 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	@Autowired
-	private AuthJwt authJwt;
 
 	/**
 	 * 注册，成功后生成token返回到cookie中
