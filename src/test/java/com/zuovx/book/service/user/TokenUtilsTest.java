@@ -16,7 +16,7 @@ public class TokenUtilsTest {
 
 	@Test
 	public void createJWT() {
-		String token = TokenUtils.createJwt("zuo","2",null,null,null,
+		String token = TokenUtils.createJwt("123456","1",null,null,null,
 				1800000,"MDk4ZjZiY2Q0NjIxZDM3M2NhZGU0ZTgzMjYyN2I0ZjY=");
 		System.out.println(token);
 

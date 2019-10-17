@@ -1,6 +1,7 @@
 package com.zuovx.book.controller;
 
 import com.zuovx.book.annotation.LoginRequired;
+import com.zuovx.book.annotation.OperatorLogController;
 import com.zuovx.book.model.User;
 import com.zuovx.book.service.DemoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +25,12 @@ public class DemoController {
 
 	@RequestMapping("/getAllUser")
 	@LoginRequired
+	@OperatorLogController(describe = "获取所有用户")
 	public List<User> getAllUser(){
 		return demoService.getAllUser();
 	}
 
+	@OperatorLogController(describe = "通过名字获取用户")
 	@RequestMapping(value = "/getUserByName",method = RequestMethod.GET)
 	public List<User> getUserByName(@RequestParam(value = "name") String name){
 		return demoService.getUserByName(name);

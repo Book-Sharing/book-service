@@ -115,7 +115,7 @@ public interface UserMapper {
      * @param id 用户id
      * @return
      */
-    @Select("SELECT EXISTS(SELECT 1 FROM user WHERE account = #{account} and id = #{userId} and is_deleted = 0) ")
+    @Select("SELECT EXISTS(SELECT 1 FROM user WHERE account = #{account} and id = #{id} and is_deleted = 0) ")
     boolean checkUserExists(@Param("account") String account,@Param("id") String id);
 
     /**
