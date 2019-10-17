@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
 
 @Mapper
@@ -98,4 +99,14 @@ public interface FriendMapper {
      * @mbg.generated
      */
     int updateByPrimaryKey(Friend record);
+
+
+    /**
+     * 检查是否已经是好友
+     * @param userId
+     * @param friendUserId
+     * @return
+     */
+    @Select("SELECT EXISTS(SELECT 1 FROM friend WHERE user_id = #{userId} and friend_user_id = #{friendUserId} and is_deleted = 0) ")
+    boolean checkFriendExists(@Param("userId") Integer userId,@Param("friendUserId") Integer friendUserId);
 }

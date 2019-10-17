@@ -15,14 +15,14 @@ CREATE TABLE `user`(
   `head_path` varchar(64) NOT NULL DEFAULT '' COMMENT '用户头像路径url',
   `is_deleted` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0否 1是',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE = utf8_general_ci COMMENT '用户信息表';
 
 CREATE TABLE `book`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更改时间',
+  `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   `book_name` varchar(64) NOT NULL DEFAULT '' COMMENT '书名',
   `book_image_url` varchar(64) NOT NULL DEFAULT '' COMMENT '书本图片url',
   `book_describe` varchar (128) NOT NULL DEFAULT '' COMMENT '书本描述',
@@ -36,7 +36,7 @@ CREATE TABLE `book`  (
 CREATE TABLE `desire`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更改时间',
+  `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   `desire_title` varchar(64) NOT NULL DEFAULT '' COMMENT '意愿标题',
   `content` varchar(255) NOT NULL DEFAULT '' COMMENT '意愿内容',
   `user_id` int(11) NOT NULL DEFAULT 0 COMMENT '所属用户的id',
@@ -49,18 +49,19 @@ CREATE TABLE `desire`  (
 CREATE TABLE `friend`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更改时间',
+  `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   `user_id` int(11) NOT NULL DEFAULT 0 COMMENT '用户id',
   `friend_user_id` int(11) NOT NULL DEFAULT 0 COMMENT '用户朋友id',
   `group_id` int(11) NOT NULL DEFAULT 0 COMMENT '朋友所属分组id',
   `is_deleted` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0否 1是',
+  `remarks` varchar(30) NOT NULL DEFAULT '' COMMENT '好友备注',
   PRIMARY KEY (`id`)
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT '好友表';
 
 CREATE TABLE `friend_group`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更改时间',
+  `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   `user_id` int(11) NOT NULL DEFAULT 0 COMMENT '用户id',
   `name` varchar (64) NOT NULL DEFAULT '' COMMENT '分组名称',
   `is_deleted` tinyint(4) NOT NULL DEFAULT 0 COMMENT '0否 1是',
@@ -71,7 +72,7 @@ CREATE TABLE `friend_group`  (
 CREATE TABLE `message`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更改时间',
+  `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   `text` varchar (1024) NOT NULL DEFAULT 0 COMMENT '内容',
   `from_user_id` int(11) NOT NULL DEFAULT 0 COMMENT '发送者id',
   `to_user_id` int(11) NOT NULL DEFAULT 0 COMMENT '接收者id',
