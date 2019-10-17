@@ -4,6 +4,7 @@ import com.zuovx.book.dao.FriendGroupMapper;
 import com.zuovx.book.dao.FriendMapper;
 import com.zuovx.book.dao.UserMapper;
 import com.zuovx.book.model.Friend;
+import com.zuovx.book.model.FriendExample;
 import com.zuovx.book.model.UserInfo;
 import com.zuovx.book.service.bus.DealResult;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author zuoweixing
@@ -67,7 +69,30 @@ public class FriendService {
 		return dealResult;
 	}
 
-	public DealResult deleteFriend(){
-		return null;
+	/**
+	 * 删除好友 逻辑删除
+	 * @param userInfo 用户信息
+	 * @param id 好友id
+	 * @return 处理结果
+	 */
+	public DealResult deleteFriend(UserInfo userInfo,int id){
+		DealResult dealResult = new DealResult();
+		dealResult.setSucceed(false);
+		FriendExample friendExample = new FriendExample();
+		friendExample.createCriteria().andFriendUserIdEqualTo(id)
+				.andUserIdEqualTo(userInfo.getId()).andIsDeletedEqualTo((byte) 0);
+		List<Friend> friends = friendMapper.selectByExample(friendExample);
+		if (friends == null || friends.size() < 1){
+			dealResult.setMsg("好友不存在！");
+			return dealResult;
+		}
+		Friend friend = friends.get(0);
+		friend.setIsDeleted((byte) 1);
+		if (1 == friendMapper.updateByPrimaryKeySelective(friend)){
+			dealResult.setSucceed(true);
+			return dealResult;
+		}
+		dealResult.setMsg("数据库操作失败！");
+		return dealResult;
 	}
 }
