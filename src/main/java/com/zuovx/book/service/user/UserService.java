@@ -10,9 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 /**
  * @author zuoweixing
@@ -22,7 +20,6 @@ import java.util.Set;
 @Slf4j
 public class UserService {
 
-	private static Set<String> tokenSets = new HashSet<>(16);
 
 	@Autowired
 	private UserMapper userMapper;
@@ -53,9 +50,9 @@ public class UserService {
 			return dealResult;
 		}
 		if (userMapper.insertSelective(user) == 1){
-			log.info("账号：{} 注册成功 id:{}",user.getAccount(),user.getUserId());
+			log.info("账号：{} 注册成功 id:{}",user.getAccount(),user.getId());
 			dealResult.setSucceed(true);
-			dealResult.setMsg(sign(user.getAccount(),user.getUserId()));
+			dealResult.setMsg(sign(user.getAccount(),user.getId()));
 		}else {
 			dealResult.setSucceed(false);
 			dealResult.setMsg("插入数据库失败");
@@ -88,7 +85,7 @@ public class UserService {
 		List<User> userList = userMapper.selectByExample(userExample);
 		if (userList != null && userList.size() == 1){
 			dealResult.setSucceed(true);
-			dealResult.setMsg(sign(userList.get(0).getAccount(),userList.get(0).getUserId()));
+			dealResult.setMsg(sign(userList.get(0).getAccount(),userList.get(0).getId()));
 		}
 		return dealResult;
 	}
