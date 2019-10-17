@@ -2,6 +2,7 @@ package com.zuovx.book.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.zuovx.book.annotation.LoginRequired;
+import com.zuovx.book.annotation.OperatorLogController;
 import com.zuovx.book.config.AuthJwt;
 import com.zuovx.book.model.User;
 import com.zuovx.book.service.bus.DealResult;
@@ -49,6 +50,7 @@ public class UserController {
 			@ApiResponse(code = 500, message = "服务器不能完成请求")}
 	)
 	@RequestMapping(value = "/register",method = RequestMethod.POST)
+	@OperatorLogController(describe = "注册")
 	public JsonResult register(HttpServletResponse response, @RequestBody String requestBody){
 		JsonResult jsonResult = new JsonResult();
 		try {
@@ -80,6 +82,7 @@ public class UserController {
 	@ApiImplicitParams({
 			@ApiImplicitParam(name = "requestBody",value = "{\"account\":\"123456\",\"password\":\"root123456\"}", required = true),
 	})
+	@OperatorLogController(describe = "登陆")
 	@RequestMapping(value = "/login",method = RequestMethod.POST)
 	public JsonResult login(HttpServletResponse response, @RequestBody String requestBody){
 		JsonResult jsonResult = new JsonResult();
@@ -111,6 +114,7 @@ public class UserController {
 	 * @return r
 	 */
 	@ApiOperation("登出")
+	@OperatorLogController(describe = "登出")
 	@RequestMapping(value = "/logout",method = RequestMethod.GET)
 	@LoginRequired
 	public JsonResult logout(HttpServletResponse response,HttpServletRequest request){

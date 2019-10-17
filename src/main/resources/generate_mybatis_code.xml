@@ -41,7 +41,7 @@
     </javaClientGenerator>
 
 
-   <table tableName="friend" > </table>
+   <table tableName="operator_log" > </table>
     <!--<table tableName="friend_group" > </table>-->
     <!--<table tableName="message" > </table>-->
 
