@@ -1,6 +1,7 @@
 package com.zuovx.book.aspect;
 
 import com.zuovx.book.annotation.OperatorLogController;
+import com.zuovx.book.annotation.ServiceExceptionLog;
 import com.zuovx.book.config.AuthJwt;
 import com.zuovx.book.dao.OperatorLogMapper;
 import com.zuovx.book.model.OperatorLog;
@@ -120,7 +121,7 @@ public class OperatorLogAspect {
 			System.out.println("异常代码:" + e.getClass().getName());
 			System.out.println("异常信息:" + e.getMessage());
 			System.out.println("异常方法:" + (joinPoint.getTarget().getClass().getName() + "." + joinPoint.getSignature().getName() + "()"));
-			System.out.println("方法描述:" + getControllerMethodDescription(joinPoint));
+			System.out.println("方法描述:" + getServiceMethodDescription(joinPoint));
 			System.out.println("请求人:" + userInfo.getAccount());
 			System.out.println("请求IP:" + ip);
 			System.out.println("请求参数:" + params);
@@ -133,6 +134,30 @@ public class OperatorLogAspect {
 		}
 	}
 
+	/**
+	 *  service 异常记录
+	 * @param joinPoint j
+	 * @return r
+	 * @throws Exception e
+	 */
+	private  String getServiceMethodDescription(JoinPoint joinPoint)throws Exception{
+		String targetName = joinPoint.getTarget().getClass().getName();
+		Class targetClass = Class.forName(targetName);
+		String methodName = joinPoint.getSignature().getName();
+		Object[] arguments = joinPoint.getArgs();
+		Method[] methods = targetClass.getMethods();
+		String description = "";
+		for (Method method:methods) {
+			if (method.getName().equals(methodName)){
+				Class[] clazzs = method.getParameterTypes();
+				if (clazzs.length==arguments.length){
+					description = method.getAnnotation(ServiceExceptionLog.class).describe();
+					break;
+				}
+			}
+		}
+		return description;
+	}
 
 	/**
 	 * 获取注解中的describe

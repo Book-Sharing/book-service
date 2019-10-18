@@ -35,4 +35,13 @@ public class DemoController {
 	public List<User> getUserByName(@RequestParam(value = "name") String name){
 		return demoService.getUserByName(name);
 	}
+
+	@RequestMapping(value = "/test")
+	public String testException(){
+		try {
+			return demoService.testException();
+		}catch (Exception e){
+			return "eeeee";
+		}
+	}
 }
