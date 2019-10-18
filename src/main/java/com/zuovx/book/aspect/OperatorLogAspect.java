@@ -6,9 +6,8 @@ import com.zuovx.book.config.AuthJwt;
 import com.zuovx.book.dao.OperatorLogMapper;
 import com.zuovx.book.model.OperatorLog;
 import com.zuovx.book.model.UserInfo;
+import com.zuovx.book.utils.ApplicationUtils;
 import com.zuovx.book.utils.IpAddressUtils;
-import com.zuovx.book.utils.TokenUtils;
-import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
@@ -20,12 +19,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
 import java.util.Date;
-
-import static com.zuovx.book.utils.Constants.TOKEN;
 
 /**
  * 操作日志切面
@@ -71,7 +67,7 @@ public class OperatorLogAspect {
 	public void doBefore(JoinPoint joinPoint){
 		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 		String params = getParams(joinPoint);
-		UserInfo userInfo = getUserInfo(request);
+		UserInfo userInfo = ApplicationUtils.getUserInfo();
 		String ip = IpAddressUtils.getIpAdrress(request);
 		try {
 
@@ -114,7 +110,7 @@ public class OperatorLogAspect {
 	public void doAfterThrowing(JoinPoint joinPoint,Throwable e){
 		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
 
-		UserInfo userInfo = getUserInfo(request);
+		UserInfo userInfo = ApplicationUtils.getUserInfo();
 		//获取请求ip
 		String ip = IpAddressUtils.getIpAdrress(request);
 
@@ -192,31 +188,6 @@ public class OperatorLogAspect {
 		return description;
 	}
 
-	/**
-	 * 获取用户信息
-	 * @param request re
-	 * @return r
-	 */
-	private  UserInfo getUserInfo(HttpServletRequest request){
-		String token = request.getParameter(TOKEN);
-		if (token == null || token.isEmpty()){
-			for (Cookie cookie : request.getCookies()){
-				if (TOKEN.equals(cookie.getName())){
-					token = cookie.getValue();
-				}
-			}
-		}
-		Claims claims = TokenUtils.parseJwt(token,authJwt.getBase64Secret());
-		if (claims == null){
-			return new UserInfo("tourists",0)	;
-		}
-		String userId = claims.get("userId").toString();
-		String account = claims.get("account").toString();
-		if (userId == null || account == null || userId.isEmpty() || account.isEmpty()){
-			return new UserInfo("tourists",0);
-		}
-		return new UserInfo(account,Integer.valueOf(userId));
-	}
 
 	private String getParams(JoinPoint joinPoint){
 		String params = "";
