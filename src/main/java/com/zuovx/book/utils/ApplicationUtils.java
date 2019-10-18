@@ -3,6 +3,7 @@ package com.zuovx.book.utils;
 import com.zuovx.book.config.AuthJwt;
 import com.zuovx.book.model.UserInfo;
 import io.jsonwebtoken.Claims;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -14,6 +15,8 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
+import java.util.Objects;
+
 import static com.zuovx.book.utils.Constants.TOKEN;
 
 /**
@@ -21,6 +24,7 @@ import static com.zuovx.book.utils.Constants.TOKEN;
  * @date 2019-10-18 10:55
  */
 @Component
+@Slf4j
 public class ApplicationUtils implements ApplicationContextAware {
 
 	private final AuthJwt authJwt;
@@ -72,11 +76,18 @@ public class ApplicationUtils implements ApplicationContextAware {
 	}
 
 	/**
-	 * 只能用在request 上下文
-	 * @return
+	 * 只能用在request上下文中使用
+	 * @return userInfo
 	 */
 	public static UserInfo getUserInfo() {
-		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+		HttpServletRequest request;
+		UserInfo userInfo = new UserInfo("tourists",0);
+		try {
+			request = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
+		}catch (Exception e){
+			log.warn("没在request上下文中使用getUserInfo！",e);
+			return userInfo;
+		}
 		String token = request.getParameter(TOKEN);
 		if (token == null || token.isEmpty()){
 			for (Cookie cookie : request.getCookies()){
@@ -87,14 +98,16 @@ public class ApplicationUtils implements ApplicationContextAware {
 		}
 		Claims claims = TokenUtils.parseJwt(token,jwt);
 		if (claims == null){
-			return new UserInfo("tourists",0)	;
+			return userInfo	;
 		}
 		String userId = claims.get("userId").toString();
 		String account = claims.get("account").toString();
 		if (userId == null || account == null || userId.isEmpty() || account.isEmpty()){
-			return new UserInfo("tourists",0);
+			return userInfo;
 		}
-		return new UserInfo(account,Integer.valueOf(userId));
+		userInfo.setAccount(account);
+		userInfo.setId(Integer.valueOf(userId));
+		return userInfo;
 	}
 
 	@Override
