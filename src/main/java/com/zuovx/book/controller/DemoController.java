@@ -36,6 +36,10 @@ public class DemoController {
 		return demoService.getUserByName(name);
 	}
 
+	/**
+	 * 测试service异常记录
+	 * @return r
+	 */
 	@RequestMapping(value = "/test")
 	public String testException(){
 		try {

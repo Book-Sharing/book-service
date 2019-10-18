@@ -47,12 +47,17 @@ public class OperatorLogAspect {
 	@Autowired
 	private AuthJwt authJwt;
 
-	//Service层切点
+	/**
+	 * Service层切点
+	 */
 	@Pointcut("@annotation(com.zuovx.book.annotation.ServiceExceptionLog)")
 	public void serviceAspect(){
 	}
 
-	//Controller层切点
+
+	/**
+	 * Controller层切点
+	 */
 	@Pointcut("@annotation(com.zuovx.book.annotation.OperatorLogController)")
 	public void controllerAspect(){
 	}
@@ -203,12 +208,12 @@ public class OperatorLogAspect {
 		}
 		Claims claims = TokenUtils.parseJwt(token,authJwt.getBase64Secret());
 		if (claims == null){
-			return new UserInfo("test",0)	;
+			return new UserInfo("tourists",0)	;
 		}
 		String userId = claims.get("userId").toString();
 		String account = claims.get("account").toString();
 		if (userId == null || account == null || userId.isEmpty() || account.isEmpty()){
-			return new UserInfo("test",0);
+			return new UserInfo("tourists",0);
 		}
 		return new UserInfo(account,Integer.valueOf(userId));
 	}
