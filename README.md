@@ -1,6 +1,7 @@
 
 #### Design
 > 想着能不能借用区块链的核心思想“去中心化”，不依赖平台作担保完成交易，让用户与用户之间完成，所有订单也是用户与用户间的绑定。
++ 设计图
 ![image](https://raw.githubusercontent.com/Book-Sharing/book/master/design/%E4%BA%A7%E5%93%81%E8%AE%BE%E8%AE%A1v1.0.1.png)
 1. 用户注册、登陆、个人信息
 2. 管理我的书架
@@ -29,5 +30,6 @@
     + liuzd
 6. 前端，待定，闲就搞
 
-### fixme 需要给项目添加操作日志、监控等 
+### 项目添加操作日志 done
+### todo 监控暂不考虑，往后再看 
 
