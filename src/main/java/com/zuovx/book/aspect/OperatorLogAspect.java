@@ -29,7 +29,7 @@ import static com.zuovx.book.utils.Constants.TOKEN;
 
 /**
  * 操作日志切面
- * @author zuoweixing
+ * @author zuovx
  * @date 2019-10-17 17:13
  */
 @Component

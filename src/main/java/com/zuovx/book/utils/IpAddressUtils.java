@@ -3,7 +3,7 @@ package com.zuovx.book.utils;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * @author zuoweixing
+ * @author zuovx
  * @date 2019-10-17 17:05
  */
 public class IpAddressUtils {
